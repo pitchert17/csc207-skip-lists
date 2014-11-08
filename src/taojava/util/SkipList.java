@@ -1,12 +1,14 @@
 package taojava.util;
 
 import java.util.Iterator;
+import java.util.Arrays;
 
 /**
  * A randomized implementation of sorted lists.  
  * 
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Tommy Pitcher
+ * @author Charlie Gao
  */
 public class SkipList<T extends Comparable<T>>
     implements SortedList<T>
@@ -14,6 +16,7 @@ public class SkipList<T extends Comparable<T>>
   // +--------+----------------------------------------------------------
   // | Fields |
   // +--------+
+  Node dummy = new Node(null, (Node[]) new Object[4]);
 
   // +------------------+------------------------------------------------
   // | Internal Classes |
@@ -31,7 +34,17 @@ public class SkipList<T extends Comparable<T>>
     /**
      * The value stored in the node.
      */
+    Node[] nexts;
+
     T val;
+
+    //Constructors
+    public Node(T val, Node[] nexts)
+    {
+      this.val = val;
+      this.nexts = nexts;
+
+    }//Node
   } // class Node
 
   // +--------------+----------------------------------------------------
@@ -70,7 +83,47 @@ public class SkipList<T extends Comparable<T>>
    */
   public void add(T val)
   {
-    // STUB
+
+    //check if this is the first node to be added by accessing dummy
+    if (dummy.nexts[1] == null)
+      { //nothing has been added, so nexts of dummy points to null
+        for (Node n : dummy.nexts)
+          {
+            Node[] nexts = (Node[]) new Object[4];
+            Node newnode = new Node(val, nexts);
+            n = newnode;
+          }
+      }
+    else
+      { //all other nodes
+        Node[] nexts = (Node[]) new Object[4];
+        Node newnode = new Node(val, nexts);
+        if (dummy.nexts[1].val.compareTo(val) <= 0)
+          {
+            for (int i = 0; i >= nexts.length -1; i++)
+              {
+                dummy.nexts[i] = newnode;
+              }//for
+          }//if
+        for (int i = 1; i <= nexts.length - 1;  i++)//iterate through the levels
+          {
+            if (dummy.nexts[i].val.compareTo(val) >= 0)
+              {
+                while (dummy.nexts[i] != null)//iterate through all Nodes at level i
+                  {
+                    if(dummy.nexts[i].val.compareTo(val) <= 0)//go down a level
+                      {
+                        
+                      }//if
+                    else  
+                  }//while
+                
+                
+            
+              }//if
+          }//for
+
+      }
   } // add(T val)
 
   /**
@@ -78,7 +131,6 @@ public class SkipList<T extends Comparable<T>>
    */
   public boolean contains(T val)
   {
-    // STUB
     return false;
   } // contains(T)
 
@@ -118,6 +170,5 @@ public class SkipList<T extends Comparable<T>>
     // STUB
     return 0;
   } // length()
-
 
 } // class SkipList<T>
