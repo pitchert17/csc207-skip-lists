@@ -1,0 +1,6 @@
+Part 5
+1. We found the SimpleTimer class to be an interesting bit of code that we could use in any algorithm analysizing class in the future. What the code does it that it creates a timer and then starts when the algorithm begins and then pauses when the process is finished. Finally an output time if given.
+
+2. We found that the SortedListTest.java class to have a lot of good examples of what a good test case should have. It has cases of the most basic of tests. As well as ordered lists, and random lists. This could be references later on if we ever needed to tests lists in other courses. 
+
+3. The SortedList interface extends Comparable, Iterable, SimpleSet, and SemiIndexed and is a good example of polymorphism and inheiritance. This example could be used as reference in cases where we would reall want to take advantage of the unique characteristics of Java and object-oriented design. 
